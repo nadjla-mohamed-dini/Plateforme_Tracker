@@ -1,46 +1,37 @@
 package com.example.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Student {
-    private int id;
-    private String firstName;
-    private String lastName;
-    private int age;
-    private double grade; 
+    private final IntegerProperty id;
+    private final StringProperty frist_name;
+    private final StringProperty last_name;
+    private final IntegerProperty age;
+    private final DoubleProperty grade;
 
-
-    public Student(int id, String firstName, String lastName, int age, double grade) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.grade = grade;
-    }
-    public int getId() {
-        return id;
+    public Student (int id, String frist_name, String last_name, int age, double grade) {
+        this.id = new SimpleIntegerProperty(id);
+        this.frist_name = new SimpleStringProperty(frist_name);
+        this.last_name = new SimpleStringProperty(last_name);
+        this.age = new SimpleIntegerProperty(age);
+        this.grade = new SimpleDoubleProperty(grade);
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public int getId() {return id.get();}
+    public String getFirstname() {return frist_name.get();}
+    public String getLastname() {return last_name.get();}
+    public int getAge() {return age.get();}
+    public double getGrade() {return grade.get();}
 
-    public String getLastName() {
-        return lastName;
-    }   
-
-    public int getAge() {
-        return age;
-    }
-
-    public double getGrade() {
-        return grade;
-    }
-    
-    @Override
-    public String toString() {
-        return "ID: " + id +
-                ", FirstName:  " + firstName +
-                ", LastName:  " + lastName +
-                ", Age:  " + age +
-                ", Grade:  " + grade; 
-    }
+    public IntegerProperty idProperty() {return id;}
+    public StringProperty firstNameProperty() {return frist_name;}
+    public StringProperty lastNameProperty() {return last_name;}
+    public IntegerProperty ageProperty() {return age;}
+    public DoubleProperty gradeProperty() {return grade;}
 }
+
