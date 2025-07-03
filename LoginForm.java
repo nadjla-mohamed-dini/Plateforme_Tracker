@@ -1,7 +1,10 @@
 package com.example.view;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class LoginForm {
@@ -23,7 +26,9 @@ public class LoginForm {
             String username = usernameField.getText();
             if (!username.isEmpty()) {
                 root.getChildren().clear();
-                root.getChildren().add(MainMenu.create(username));
+                root.getChildren().add(ToolBar.create());
+                root.getChildren().add(StudentTable.create());
+                
             }
         });
 
