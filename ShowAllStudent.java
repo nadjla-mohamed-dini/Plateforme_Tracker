@@ -3,13 +3,13 @@ package com.example.view;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-public class AddStudent {
+public class ShowAllStudent {
     public static HBox create() {
-        Button addButton = new Button("Add a new student ➕");
-        addButton.setOnAction( e-> {
-            System.out.println("clic ajouter");
+        Button showAllButton = new Button("Show All");
+        showAllButton.setOnAction(e -> {
+            System.out.println("");
         });
-        HBox container = new HBox(addButton);
+        HBox container = new HBox(showAllButton);
         container.setSpacing(10);
         container.setStyle("-fs-alignment: center-left;");
         return container;
