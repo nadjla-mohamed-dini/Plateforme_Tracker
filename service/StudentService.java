@@ -1,12 +1,13 @@
 package com.example.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.example.converter.StudentConverter;
 import com.example.dao.StudentDAO;
 import com.example.model.Student;
 import com.example.model.StudentFX;
-import com.example.converter.StudentConverter;
 
 public class StudentService {
 
@@ -36,5 +37,9 @@ public class StudentService {
 
     public boolean deleteStudent(int id) {
         return dao.deleteStudentById(id);
+    }
+
+    public Map<String, Integer> getAgeRangeStats() {
+    return dao.getStudentCountByAgeRange();
     }
 }
