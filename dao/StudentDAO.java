@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException; 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.model.Student;
 
@@ -157,5 +159,37 @@ public class StudentDAO {
             System.err.println("❌ Error updating student: " + e.getMessage());
             return false;
         }
+    }
+
+    public Map<String, Integer> getStudentCountByAgeRange() {
+        Map<String, Integer> ageRanges = new LinkedHashMap<>();
+
+        String sql = "SELECT " +
+                "CASE " +
+                " WHEN age < 18 THEN '< 18' " +
+                " WHEN age BETWEEN 18 AND 25 THEN '18-25' " +
+                " WHEN age BETWEEN 26 AND 35 THEN '26-35' " +
+                " WHEN age BETWEEN 36 AND 42 THEN '36-42' " +
+                " ELSE '> 42' " +
+                "END AS age_range, COUNT(*) AS total " +
+                "FROM student " +
+                "GROUP BY age_range " +
+                "ORDER BY age_range";
+
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String range = rs.getString("age_range");
+                int count = rs.getInt("total");
+                ageRanges.put(range, count);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("❌ Erreur lors de la récupération des données : " + e.getMessage());
+        }
+
+        return ageRanges;
     }
 }
